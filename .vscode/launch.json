@@ -1,0 +1,29 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Odoo",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\odoo\\odoo-bin",
+      "args": ["-c", "odoo.conf"]
+    },
+    {
+      "name": "Python: Odoo Update All Module",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\odoo\\odoo-bin",
+      "args": ["-c", "odoo.conf", "-i", "real_estate_ads"]
+    },
+    {
+      "name": "Python: Odoo Update Module",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}\\odoo\\odoo-bin",
+      "args": ["-c", "odoo.conf", "-u", "real_estate_ads"]
+    }
+  ]
+}

@@ -2,6 +2,7 @@ from odoo import fields, models, api, _
 
 class Property(models.Model):
     _name = 'estate.property'
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'utm.mixin', 'website.published.mixin', 'website.seo.metadata']
     _description = "Estate Properties"
 
     name = fields.Char(string="Name", required=True)
@@ -17,7 +18,7 @@ class Property(models.Model):
     postcode = fields.Char(string="Postcode")
     # date_availability = fields.Date(string="Available From", readonly=True)
     date_availability = fields.Date(string="Available From")
-    expected_price = fields.Float(string="Expected Price")
+    expected_price = fields.Float(string="Expected Price", tracking=True)
     best_offer = fields.Float(string="Best Offer", compute='_compute_best_price')
     selling_price = fields.Float(string="Selling Price")
     bedrooms = fields.Integer(string="Bedrooms")
@@ -97,6 +98,11 @@ class Property(models.Model):
     def _get_report_base_filename(self):
         self.ensure_one()
         return f'Estate Property - {self.name}'
+    
+    # Override Website URL Function Compute
+    def _compute_website_url(self):
+        for rec in self:
+            rec.website_url = '/properties/%s' % self.name
 
 class PropertyType(models.Model):
     _name = 'estate.property.type'

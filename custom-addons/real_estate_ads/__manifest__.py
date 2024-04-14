@@ -7,7 +7,7 @@
         Real Estate Module to show properties
     """,
     "category":"Sales",
-    "depends":["base"],
+    "depends":["base", "mail", "website"],
     "data":[
         "security/ir.model.access.csv",
         "security/res_groups.xml",

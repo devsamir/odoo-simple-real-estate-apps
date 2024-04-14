@@ -129,8 +129,11 @@
                             <button class="oe_stat_button" name="action_property_view_offers" icon="fa-handshake-o" type="object">
                                 <field name='offer_count' string="Offers" widget="statinfo" />
                             </button>
-                            <button class="oe_stat_button" name="action_client_action" icon="fa-handshake-o" type="object">
+                            <!-- <button class="oe_stat_button" name="action_client_action" type="object">
                                 <field name='offer_count' string="Testing Client" widget="statinfo" />
+                            </button> -->
+                            <button class="oe_stat_button" name="website_publish_button" icon="fa-globe" type="object">
+                                <field name='is_published' widget="website_publish_button" />
                             </button>
                         </div>
                         <group>
@@ -180,12 +183,25 @@
                             <page string="Other Info">
                                 <group>
                                     <field name="sales_id" widget="many2one_avatar_employee"/>
+                                   
+                                    <!-- utm.mixin -->
+                                    <field name="campaign_id"/>
+                                    <field name="source_id"/>
+                                    <field name="medium_id"/>
+                                    <!-- utm.mixin -->
+
                                     <field name="buyer_id"/>
                                     <field name="buyer_phone"/>
+                                    <field name="website_url" widget="url" />
                                 </group>
                             </page>
                         </notebook>
                     </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
                 </form>
             </field>
         </record>

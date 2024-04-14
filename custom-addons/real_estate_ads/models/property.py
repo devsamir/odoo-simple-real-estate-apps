@@ -15,7 +15,8 @@ class Property(models.Model):
     type_id = fields.Many2one('estate.property.type', string="Property Type")
     description = fields.Text(string="Description")
     postcode = fields.Char(string="Postcode")
-    date_availability = fields.Date(string="Available From", readonly=True)
+    # date_availability = fields.Date(string="Available From", readonly=True)
+    date_availability = fields.Date(string="Available From")
     expected_price = fields.Float(string="Expected Price")
     best_offer = fields.Float(string="Best Offer", compute='_compute_best_price')
     selling_price = fields.Float(string="Selling Price")
@@ -93,6 +94,9 @@ class Property(models.Model):
     def action_cancel(self):
         self.state = 'cancel'
     
+    def _get_report_base_filename(self):
+        self.ensure_one()
+        return f'Estate Property - {self.name}'
 
 class PropertyType(models.Model):
     _name = 'estate.property.type'

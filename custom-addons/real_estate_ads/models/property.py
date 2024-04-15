@@ -50,7 +50,8 @@ class Property(models.Model):
     
     @api.onchange('living_area', 'garden_area')
     def _compute_total_area(self):
-        self.total_area = self.living_area + self.garden_area
+        for rec in self:
+            rec.total_area = rec.living_area + rec.garden_area
 
     
     @api.depends('offer_ids')

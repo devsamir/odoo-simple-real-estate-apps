@@ -19,9 +19,9 @@ class Property(models.Model):
     postcode = fields.Char(string="Postcode")
     # date_availability = fields.Date(string="Available From", readonly=True)
     date_availability = fields.Date(string="Available From")
-    expected_price = fields.Float(string="Expected Price", tracking=True)
-    best_offer = fields.Float(string="Best Offer", compute='_compute_best_price')
-    selling_price = fields.Float(string="Selling Price")
+    expected_price = fields.Monetary(string="Expected Price", tracking=True)
+    best_offer = fields.Monetary(string="Best Offer", compute='_compute_best_price')
+    selling_price = fields.Monetary(string="Selling Price")
     bedrooms = fields.Integer(string="Bedrooms")
     living_area = fields.Integer(string="Living Area(sqm)")
     facade = fields.Integer(string="Facades")
@@ -39,6 +39,8 @@ class Property(models.Model):
     total_area = fields.Integer(string="Total Area", compute='_compute_total_area')
 
     offer_count = fields.Integer(string="Offer Count", compute="_compute_offer_count")
+    currency_id = fields.Many2one('res.currency', string="Currency", \
+        default=lambda self: self.env.user.company_id.currency_id)
 
     
     @api.depends('offer_ids')

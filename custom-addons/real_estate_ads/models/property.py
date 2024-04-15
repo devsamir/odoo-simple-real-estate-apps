@@ -2,7 +2,8 @@ from odoo import fields, models, api, _
 
 class Property(models.Model):
     _name = 'estate.property'
-    _inherit = ['mail.thread', 'mail.activity.mixin', 'utm.mixin', 'website.published.mixin', 'website.seo.metadata']
+    # _inherit = ['mail.thread', 'mail.activity.mixin', 'utm.mixin', 'website.published.mixin', 'website.seo.metadata']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Estate Properties"
 
     name = fields.Char(string="Name", required=True)
@@ -11,7 +12,7 @@ class Property(models.Model):
         ('received', 'Offer Received'),
         ('accepted', 'Offer Accepted'),
         ('sold', 'Sold'),
-        ('cancel', 'Cancelled')], default='new', string="Status")
+        ('cancel', 'Cancelled')], default='new', string="Status", group_expand='_expand_state')
     tag_ids = fields.Many2many('estate.property.tag', string="Property Tag")
     type_id = fields.Many2one('estate.property.type', string="Property Type")
     description = fields.Text(string="Description")
@@ -103,6 +104,11 @@ class Property(models.Model):
     def _compute_website_url(self):
         for rec in self:
             rec.website_url = '/properties/%s' % self.name
+            
+    def _expand_state(self, states, domain, order):
+        return [
+            key for key, dummy in type(self).state.selection
+        ]
 
 class PropertyType(models.Model):
     _name = 'estate.property.type'

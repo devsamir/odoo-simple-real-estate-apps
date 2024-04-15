@@ -92,6 +92,7 @@
         <record id="quick_create_estate_property_form_view" model="ir.ui.view">
             <field name="name">estate.property.form</field>
             <field name="model">estate.property</field>
+            <field name="priority">1000</field> <!-- Create Priority to 1000 to avoid odoo confusion-->
             <field name="arch" type="xml">
                 <form>
                     <group>
@@ -129,21 +130,20 @@
                             <button class="oe_stat_button" name="action_property_view_offers" icon="fa-handshake-o" type="object">
                                 <field name='offer_count' string="Offers" widget="statinfo" />
                             </button>
-                            <!-- <button class="oe_stat_button" name="action_client_action" type="object">
+                            <button class="oe_stat_button" name="action_client_action" type="object">
                                 <field name='offer_count' string="Testing Client" widget="statinfo" />
-                            </button> -->
-                            <button class="oe_stat_button" name="website_publish_button" icon="fa-globe" type="object">
-                                <field name='is_published' widget="website_publish_button" />
                             </button>
+                            <!-- <button class="oe_stat_button" name="website_publish_button" icon="fa-globe" type="object">
+                                <field name='is_published' widget="website_publish_button" />
+                            </button> -->
                         </div>
                         <group>
-                            <field name="name" widget="char_emojis" placeholder="Property Name" />
+                            <field name="name" placeholder="Property Name" />
                             <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" />
                             <group>
-                            <field name="type_id" />
-                            <field name="postcode" password="true" />
-                            <field name="date_availability" />
-
+                                <field name="type_id" />
+                                <field name="postcode" password="true" />
+                                <field name="date_availability" />
                             </group>
                             <group>
                                 <field name="expected_price" />
@@ -184,15 +184,15 @@
                                 <group>
                                     <field name="sales_id" widget="many2one_avatar_employee"/>
                                    
-                                    <!-- utm.mixin -->
+                                    <!-- utm.mixin
                                     <field name="campaign_id"/>
                                     <field name="source_id"/>
                                     <field name="medium_id"/>
-                                    <!-- utm.mixin -->
+                                    utm.mixin -->
 
                                     <field name="buyer_id"/>
                                     <field name="buyer_phone"/>
-                                    <field name="website_url" widget="url" />
+                                    <!-- <field name="website_url" widget="url" /> -->
                                 </group>
                             </page>
                         </notebook>
